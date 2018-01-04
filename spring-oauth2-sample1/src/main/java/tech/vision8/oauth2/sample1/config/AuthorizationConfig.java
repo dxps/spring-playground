@@ -20,6 +20,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 	
 	private int accessTokenValiditySeconds = 10_000;
+	
 	private int refreshTokenValiditySeconds = 30_000;
 	
 	@Value("${security.oauth2.resource.id}")
@@ -65,7 +66,7 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 				.authorizedGrantTypes("client_credentials", "password", "refresh_token")
 				.authorities("ROLE_TRUSTED_CLIENT")
 				.scopes("read", "write")
-				.resourceIds("resourceId")
+				.resourceIds(resourceId)
 				.accessTokenValiditySeconds(accessTokenValiditySeconds)
 				.refreshTokenValiditySeconds(refreshTokenValiditySeconds)
 				.secret("secret");
