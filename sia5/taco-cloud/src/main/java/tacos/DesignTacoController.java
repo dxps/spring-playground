@@ -3,11 +3,13 @@ package tacos;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tacos.Ingredient.Type;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,7 +40,7 @@ public class DesignTacoController {
 			model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
 		}
 		
-		model.addAttribute("design", new Design());
+		model.addAttribute("taco", new Taco());
 		
 		return "design"; // pass the model to "design" (the logical name of the) view
 		
@@ -46,11 +48,17 @@ public class DesignTacoController {
 	
 	
 	@PostMapping
-	public String processDesign(Design design) {
+	public String processDesign(@Valid Taco taco, Errors errors) {
 		
-		// The form fields are bound to the properties of 'design' object passed to this method.
-		// Save the taco design... We'll do this in chapter 3
-		log.info("Processing design: " + design);
+		// The form fields are bound to the properties of 'taco' object.
+		// @Valid tells Spring MVC to perform the validation of 'taco'
+		// before this method is called.
+		if (errors.hasErrors()) {
+			return "design";
+		}
+		
+		// Save the taco taco... We'll do this in chapter 3
+		log.info("Processing taco: " + taco);
 		
 		return "redirect:/orders/current";
 		
