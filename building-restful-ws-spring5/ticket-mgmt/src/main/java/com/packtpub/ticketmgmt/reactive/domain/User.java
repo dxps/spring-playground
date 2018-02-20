@@ -10,6 +10,9 @@ public class User {
 	private Integer userid;
 	private String username;
 	
+	public User() {
+	}
+	
 	public User(Integer userid, String username) {
 		this.userid = userid;
 		this.username = username;
@@ -29,6 +32,13 @@ public class User {
 	
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	@Override
+	public String toString() {
+		return "User{ userid=" + userid +
+				", username='" + username + '\'' +
+				" }";
 	}
 	
 }

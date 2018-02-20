@@ -9,6 +9,9 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import static org.springframework.web.reactive.function.server.RequestPredicates.*;
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+
 /**
  * @author vision8
  */
@@ -21,9 +24,24 @@ public class RouterConfig {
 		
 		return RouterFunctions
 				.route(
-						RequestPredicates.GET("/users")
-								.and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
+						GET("/users").and(accept(MediaType.ALL)),
 						handler::getAllUsers
+				)
+				.andRoute(
+						GET("/users/{id}").and(accept(MediaType.APPLICATION_JSON)),
+						handler::getUser
+				)
+				.andRoute(
+						POST("/users").and(accept(MediaType.APPLICATION_JSON)),
+						handler::createUser
+				)
+				.andRoute(
+						PUT("/users/{id}").and(accept(MediaType.APPLICATION_JSON)),
+						handler::updateUser
+				)
+				.andRoute(
+						DELETE("/users/{id}"),
+						handler::deleteUser
 				);
 		
 	}
