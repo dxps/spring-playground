@@ -2,6 +2,7 @@ package com.ticketmgmt.api.reactive;
 
 import com.ticketmgmt.domain.User;
 import com.ticketmgmt.repo.UserRepository;
+import com.ticketmgmt.services.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -18,11 +19,17 @@ import reactor.core.publisher.Mono;
 @Component
 public class UserHandler {
 	
-	private final UserRepository userRepository;
+	//private final UserRepository userRepository;
 	
+	private final UserService userService;
+
+
+//	public UserHandler(UserRepository userRepository) {
+//		this.userRepository = userRepository;
+//	}
 	
-	public UserHandler(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public UserHandler(UserService userService) {
+		this.userService = userService;
 	}
 	
 	
@@ -31,7 +38,7 @@ public class UserHandler {
 		return ServerResponse
 				.ok()
 				.contentType(MediaType.APPLICATION_JSON)
-				.body(this.userRepository.getAllUsers(), User.class);
+				.body(this.userService.getAllUsers(), User.class);
 		
 	}
 	
@@ -39,7 +46,7 @@ public class UserHandler {
 	public Mono<ServerResponse> getUser(ServerRequest request) {
 		
 		int id = Integer.valueOf(request.pathVariable("id"));
-		Mono<User> userMono = this.userRepository.getUser(id);
+		Mono<User> userMono = this.userService.getUser(id);
 		return userMono
 				.flatMap(
 						user -> ServerResponse.ok()
@@ -55,8 +62,9 @@ public class UserHandler {
 	
 	public Mono<ServerResponse> createUser(ServerRequest request) {
 		
-		Mono<User> user = request.bodyToMono(User.class);
-		return ServerResponse.ok().build(this.userRepository.saveUser(user));
+		User user = request.bodyToMono(User.class).block();
+		return ServerResponse.ok()
+				.build(this.userService.createUser(user.getUserid(), user.getUsername()));
 		
 	}
 	
@@ -64,8 +72,9 @@ public class UserHandler {
 	public Mono<ServerResponse> updateUser(ServerRequest request) {
 		
 		Integer id = Integer.valueOf(request.pathVariable("id"));
-		Mono<User> user = request.bodyToMono(User.class);
-		return ServerResponse.ok().build(this.userRepository.updateUser(id, user));
+		User user = request.bodyToMono(User.class).block();
+		return ServerResponse.ok()
+				.build(this.userService.updateUser(id, user.getUsername()));
 		
 	}
 	
@@ -73,7 +82,8 @@ public class UserHandler {
 	public Mono<ServerResponse> deleteUser(ServerRequest request) {
 		
 		int id = Integer.valueOf(request.pathVariable("id"));
-		return ServerResponse.ok().build(this.userRepository.deleteUser(id));
+		return ServerResponse.ok()
+				.build(this.userService.deleteUser(id));
 		
 	}
 	
