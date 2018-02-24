@@ -1,12 +1,12 @@
-package com.packtpub.ticketmgmt;
+package com.ticketmgmt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TicketMgmtApplication {
+public class TicketMgmtApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TicketMgmtApplication.class, args);
+		SpringApplication.run(TicketMgmtApp.class, args);
 	}
 }

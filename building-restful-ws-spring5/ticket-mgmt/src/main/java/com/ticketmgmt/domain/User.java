@@ -1,4 +1,4 @@
-package com.packtpub.ticketmgmt.reactive.domain;
+package com.ticketmgmt.domain;
 
 /**
  * A simple user model.

@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.packtpub.restapp</groupId>
+	<groupId>com.ticketmgmt</groupId>
 	<artifactId>ticket-mgmt</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -26,6 +26,13 @@
 
 	<dependencies>
 		
+		<!--
+		_________________________________
+		
+		     Development & Runtime
+		_________________________________
+		-->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
@@ -43,7 +50,19 @@
 			<version>0.9.0</version>
 		</dependency>
 		
-		<!-- Testing -->
+		<!-- as Java 9 is used, this is part of the JEE -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		
+		<!--
+		_________________________________
+		
+		           Testing
+		_________________________________
+		-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

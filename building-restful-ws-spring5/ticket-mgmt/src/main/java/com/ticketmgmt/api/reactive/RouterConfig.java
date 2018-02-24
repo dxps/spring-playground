@@ -1,16 +1,14 @@
-package com.packtpub.ticketmgmt.reactive.config;
+package com.ticketmgmt.api.reactive;
 
-import com.packtpub.ticketmgmt.reactive.api.UserHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.server.RequestPredicates;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
-import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+
 
 /**
  * @author vision8

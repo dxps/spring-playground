@@ -1,6 +1,6 @@
-package com.packtpub.ticketmgmt.reactive.repo;
+package com.ticketmgmt.repo;
 
-import com.packtpub.ticketmgmt.reactive.domain.User;
+import com.ticketmgmt.domain.User;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

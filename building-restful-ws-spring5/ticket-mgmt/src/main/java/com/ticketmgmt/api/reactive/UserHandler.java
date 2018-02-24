@@ -1,7 +1,7 @@
-package com.packtpub.ticketmgmt.reactive.api;
+package com.ticketmgmt.api.reactive;
 
-import com.packtpub.ticketmgmt.reactive.domain.User;
-import com.packtpub.ticketmgmt.reactive.repo.UserRepository;
+import com.ticketmgmt.domain.User;
+import com.ticketmgmt.repo.UserRepository;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
